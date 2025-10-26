@@ -1,0 +1,18 @@
+[package]
+name = "grantish-prime-translator"
+version = "0.1.0"
+authors = ["boyninja1555 <flappyfloorg@gmail.com>"]
+edition = "2024"
+description = "Translator for Grantish Prime"
+license = "MIT"
+repository = "https://github.com/boyninja1555/grantish-prime-translator"
+keywords = ["cli", "translator", "grantish"]
+categories = ["command-line-utilities"]
+
+[dependencies]
+clap = { version = "4.5.50", features = ["derive"] }
+copypasta = "0.10.2"
+
+[[bin]]
+name = "gptranslate"
+path = "src/main.rs"
