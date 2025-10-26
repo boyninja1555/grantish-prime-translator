@@ -1,6 +1,6 @@
 [package]
 name = "grantish-prime-translator"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["boyninja1555 <flappyfloorg@gmail.com>"]
 edition = "2024"
 description = "Translator for Grantish Prime"

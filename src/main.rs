@@ -5,7 +5,7 @@ mod grantish_prime;
 
 #[derive(Parser)]
 #[command(name = "Grantish Prime Translator")]
-#[command(version = "v0.1.0")]
+#[command(version = "v0.1.1")]
 #[command(
     about = "Translator for Grantish Prime",
     long_about = "Translates to and from Grantish Prime"
