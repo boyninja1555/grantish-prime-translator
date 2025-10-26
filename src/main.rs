@@ -17,11 +17,14 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    To {
+    #[command(about = "Translate Grantish Prime to English")]
+    ToEnglish {
         #[arg(num_args = 1..)]
         input: Vec<String>,
     },
-    From {
+
+    #[command(about = "Translate English to Grantish Prime")]
+    FromEnglish {
         #[arg(num_args = 1..)]
         input: Vec<String>,
     },
@@ -34,30 +37,7 @@ fn main() {
     let map_b = grantish_prime_english();
 
     match &cli.command {
-        Commands::To { input } => {
-            let allowed_chars: Vec<char> = map_a.keys().copied().collect();
-            let text: String = input
-                .join(" ")
-                .trim()
-                .to_lowercase()
-                .chars()
-                .filter(|ch| allowed_chars.contains(ch))
-                .collect();
-            println!("Translating to Grantish Prime... ({})", text);
-
-            let mut output = String::new();
-            for ch in text.chars() {
-                let mapped = map_a.get(&ch).cloned().unwrap_or('☐');
-                output.push(mapped);
-            }
-
-            println!("{}", output);
-
-            let _ = ctx.set_contents(output);
-            println!("✅ Copied");
-        }
-
-        Commands::From { input } => {
+        Commands::ToEnglish { input } => {
             let allowed_chars: Vec<char> = map_b.keys().copied().collect();
             let text: String = input
                 .join("_")
@@ -75,6 +55,29 @@ fn main() {
             }
 
             println!("{}", output);
+        }
+
+        Commands::FromEnglish { input } => {
+            let allowed_chars: Vec<char> = map_a.keys().copied().collect();
+            let text: String = input
+                .join(" ")
+                .trim()
+                .to_lowercase()
+                .chars()
+                .filter(|ch| allowed_chars.contains(ch))
+                .collect();
+            println!("Translating from English... ({})", text);
+
+            let mut output = String::new();
+            for ch in text.chars() {
+                let mapped = map_a.get(&ch).cloned().unwrap_or('☐');
+                output.push(mapped);
+            }
+
+            println!("{}", output);
+
+            let _ = ctx.set_contents(output);
+            println!("✅ Copied");
         }
     }
 }
